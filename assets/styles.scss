@@ -1,0 +1,204 @@
+@import './_variables.scss';
+@import "./grid-variables";
+@import "./mixins/main.scss";
+@import "./grid";
+@import "./visibility"; // Visibility last for precedence
+
+
+// reset
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+// general styles
+a{
+  color: $primary;
+  text-decoration: none;
+  &:visited {
+    color: $light_text_color;
+  }
+}
+
+// app styles
+body{
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  background: $light_bg;
+  color: $light_text_color;
+  .app-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    header{
+      background: $light_navbar_bg;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid $light_border_color;
+      .logo{
+        display: flex;
+        align-items: center;
+        h2{
+          color: $light_text_color;
+          font-size: 16px;
+        }
+        .toggle-sidebar {
+          width: 50px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 16px;
+          color: #777;
+        }
+      }
+      nav {
+        margin-right: 15px;
+        ul{
+          display: flex;
+          list-style: none;
+          li{
+            padding: 10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            a{
+              color: #777;
+              font-size: 16px;
+            }
+          }
+          .active{
+            a{
+              color: $primary;
+            }
+          }
+        }
+      }
+    }
+    main{
+      flex-grow: 1;
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      overflow: scroll;
+      .sidebar{
+        position: absolute;
+        top: 50px;
+        height: calc(100vh - 50px);
+        transform: translateX(-270px);
+        width: 270px;
+        background: $light_aside_bg;
+        border-right: 1px solid $light_border_color;
+        transition: transform .4s ease-in-out;
+        nav{
+          ul {
+            list-style: none;
+            margin: 0;
+            li{
+              height: 50px;
+              display: flex;
+              align-items: center;
+              span {
+                width: 50px;
+                text-align: center;
+                color: #999;
+                font-size: 18px;
+              }
+              b{
+                justify-content: center;
+                color: #555;
+                font-weight: 500;
+              }
+              &.active{
+                span, b {
+                  color: $primary !important;
+                }
+              }
+            }
+          }
+        }
+      }
+      .open{
+        transform: translateX(0px);
+      }
+      nav {
+        ul {
+          li {
+            color: #777;
+          }
+        }
+      }
+      .page-content{
+        flex-grow: 1;
+        padding: 25px;
+      }
+    }
+  }
+}
+// app dark mode styles
+.dark{
+  background: $dark_bg !important;
+  color: $dark_text_color !important;
+  header{
+    background: $dark_navbar_bg !important;
+    border-bottom: 1px solid $dark_border_color !important;
+    h2{
+      color: $dark_text_color !important;
+    }
+  }
+  main{
+    aside{
+      background: $dark_aside_bg !important;
+      border-right: 1px solid $dark_border_color !important;
+      nav{
+        ul {
+          li{
+            b{
+              color: #999 !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// widgets
+.widgets {
+  display: flex;
+  justify-content: space-between;
+  .widget{
+    display: block;
+    background: white;
+    padding: 20px;
+    color: $light_text_color;
+    flex-grow: 1;
+    margin-right: 25px;
+    border: 1px solid $light_border_color;
+    border-radius: 8px;
+    &:last-child{
+      margin-right: 0;
+    }
+    h5{
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #777;
+    }
+  }
+}
+.dark {
+  .widget{
+    background: $dark_navbar_bg;
+    padding: 20px;
+    color: $dark_text_color;
+    border: 1px solid $dark_border_color;
+  }
+}
